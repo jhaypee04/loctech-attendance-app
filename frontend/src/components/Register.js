@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import { Redirect } from 'react-router-dom'
 import Navbar from './Navbar'
 
 const Register = () => {
@@ -8,6 +9,7 @@ const Register = () => {
     const [error, setError] = useState(null)
     const [visibility, setVisibility] = useState(false)
     const [togglePassword, setTogglePassword] = useState('password')
+    const [register, setRegister] = useState(false)
 //     const [registrationInfo, setRegistrationInfo] = useState({fullName,email,password})
 
 //     useEffect(()=>{
@@ -35,6 +37,7 @@ const Register = () => {
           .then((response) => response.json())
           .then((data) => {
                console.log('Success:', data);
+               setRegister(true)
           })
           .catch((error) => {
                console.error('Error:', error);
@@ -60,6 +63,7 @@ const Register = () => {
 
                          <input type="submit" value="Register" className=''/>
                     </form>
+                    {register && <Redirect to='/dashboard' push={true} />}
                </div>
             </div>
        </>
