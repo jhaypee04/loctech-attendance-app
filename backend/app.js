@@ -32,6 +32,46 @@ app.get('/register', (req, res)=>{
     res.status(200).json({test: "Working2"})
 })
 
+// handling post from login
+app.post('/login', (req, res)=>{
+    const loginInfo = req.body
+    const email = loginInfo.email
+    const password = loginInfo.password
+
+    // console.log(email, password)
+
+    userSchema.findOne({email})
+    .then((user)=>{
+        // console.log("database password: ", user.password)
+        bcrypt.compare(password, user.password, async (err, data)=>{
+            if(err){
+                console.log(err)
+            }
+            else{
+                const payload = {
+                    user: {
+                        email: user.email
+                    }
+                }
+
+                const token = jwt.sign(payload, process.env.SECRET_KEY, {
+                    expiresIn: '3600s'
+                })
+    
+                res.cookie('token', token, {
+                    maxAge: 3600 * 1000,
+                    httpOnly: false
+                })
+    
+                res.status(200).json({msg: 'successful login'})
+            }
+        })
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+})
+
 // handling post from register.js
 app.post('/register', async (req, res)=>{
     const registrationDetails = req.body
