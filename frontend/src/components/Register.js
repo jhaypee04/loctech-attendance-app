@@ -13,7 +13,7 @@ const Register = () => {
 //     const [registrationInfo, setRegistrationInfo] = useState({fullName,email,password})
 
 //     useEffect(()=>{
-     //    fetch('/register')
+     //    fetch('http://localhost:4000/register')
      //    .then((response)=>{
      //        return response.json()
      //    })
@@ -27,7 +27,7 @@ const Register = () => {
           const registrationInfo = {fullName, email, password}
           console.log(registrationInfo)
 
-          fetch('/register', {
+          fetch('http://localhost:4000/register', {
                method: "POST",
                headers: {
                     'Content-Type': 'application/json'

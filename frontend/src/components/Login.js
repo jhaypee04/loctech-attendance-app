@@ -15,7 +15,7 @@ const Login = () => {
      const loginInfo = {email, password}
      console.log(loginInfo)
 
-     fetch('/login', {
+     fetch('http://localhost:4000/login', {
           method: "POST",
           headers: {
                'Content-Type': 'application/json'
