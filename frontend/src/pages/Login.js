@@ -1,13 +1,16 @@
 import { useState } from 'react'
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [role, setRole] = useState('instructor')
+  const { login, error, isLoading } = useLogin()
   
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    await login(email,password,role)
     console.log(email,password,role)
   }
 
@@ -54,11 +57,13 @@ const Login = () => {
           </div>
 
           <div className="flex justify-center ">
-            <input
+            <button
+              disabled={isLoading}
               type="submit"
               className="sm:w-1/4 w-2/4 bg-gray-50 border-2 border-gray-400 px-1 cursor-pointer"
-            />
+            > Log in</button>
           </div>
+          {error && <div className="text-red-500">{error}</div>}
         </form>
         
       </div>

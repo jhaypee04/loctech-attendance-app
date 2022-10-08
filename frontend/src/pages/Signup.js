@@ -1,15 +1,17 @@
 import { useState } from 'react'
+import { useSignup } from '../hooks/useSignup'
 
 const Signup = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('instructor')
+  const [role, setRole] = useState('instructor') 
+  const {signup, error, isLoading} = useSignup()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(username,email,password,role)
+    await signup(username,email,password,role)
   }
 
   return (
@@ -65,11 +67,13 @@ const Signup = () => {
           </div>
 
           <div className="flex justify-center ">
-            <input
+            <button
+              disabled={isLoading}
               type="submit"
               className="sm:w-1/4 w-2/4 bg-gray-50 border-2 border-gray-400 px-1 cursor-pointer"
-            />
+            > Sign up</button>
           </div>
+          {error && <div className="text-red-500">{error}</div>}
         </form>
 
       </div>
