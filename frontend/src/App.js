@@ -1,38 +1,28 @@
-import Dashboard from './components/dashboard/Dashboard'
-import LandingPage from './components/LandingPage';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Register from './components/Register';
-import Login from './components/Login';
-import HomePage from './components/HomePage';
-import AddNewClassroom from './components/AddNewClassRoom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// component
+import Navbar from "./components/Navbar";
+// pages
+import LandingPage from "./pages/LandingPage";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import ClassroomGallery from "./pages/ClassroomGallery";
+import CreateNewClassroom from "./pages/CreateNewClassroom";
+import Classroom from "./pages/Classroom";
 
-function App() {
+export default function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <LandingPage />
-        </Route>
-        <Route path='/dashboard'>
-          <div className="app_container">
-            <Dashboard />
-          </div>
-        </Route>
-        <Route path='/register'>
-            <Register />
-        </Route>
-        <Route path='/login'>
-            <Login />
-        </Route>
-        <Route path='/homepage'>
-            <HomePage />
-        </Route>
-        <Route path='/addNewClassroom'>
-            <AddNewClassroom />
-        </Route>
-      </Switch>
-    </Router>
-    );
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/classroomgallery" element={<ClassroomGallery />} />
+          <Route path="/createnewclassroom" element={<CreateNewClassroom />} />
+          <Route path="/classroom" element={<Classroom />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
-
-export default App;

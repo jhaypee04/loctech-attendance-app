@@ -1,39 +1,68 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom'
-const Navbar = () => {
-    const [ open, setOpen ] = useState(false)
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-    return ( 
-        <>
-            <nav className="bg-light_blue sm:py-3 sm:pl-2 sm:flex justify-between items-center overflow-hidden">
-                <div className="logo  w-4/12 sm:w-1/12 ">
-                    <Link to='/'>
-                        <img src="images/loctech_logo_red.png" alt="" />
-                    </Link>
-                </div>
-                <div onClick={()=>{setOpen(!open)}} className="burgar_menu font-medium text-2xl absolute right-8 top-6 sm:hidden cursor-pointer">
-                    { open ? 'Close' : 'Menu'}
-                </div>
-                <div className="menu sm:pr-5">
-                    <ul className={`sm:flex gap-2 left-0 absolute sm:static w-full text-white transition-all duration-500 ease in ${open ? 'top-16' : 'top-[-490px]'}`}>
-                        <li className=" bg-darkest_purple sm:bg-inherit mt-2 sm:mt-0 sm:text-darkest_purple p-2 font-medium cursor-default">Welcome Mr Uzomzii</li>
-                        <li className=" bg-red p-2 cursor-pointer transition ease-in-out delay-100 hover:translate-y-1 duration-500 ">
-                            <Link to='/addNewClassroom'>Add new classroom</Link>
-                        </li>
-                        <li className=" bg-darkest_purple p-2 cursor-pointer transition ease-in-out delay-100 active:translate-y-1  hover:bg-dark_blue duration-500">
-                            <Link to='/register'>Register</Link>
-                        </li>
-                        <li className=" bg-darkest_purple p-2 cursor-pointer transition ease-in-out delay-100 active:translate-y-1  hover:bg-dark_blue duration-500">
-                            <Link to='/login'>Login</Link>
-                        </li>
-                        <li className=" bg-darkest_purple p-2 cursor-pointer transition ease-in-out delay-100 active:translate-y-1  hover:bg-dark_blue duration-500">
-                            <Link to='/'>Logout</Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </>
-     );
-}
- 
+const Navbar = () => {
+  const [showMenu, setShowMenu] = useState("sm:hidden block");
+  const [hideMenu, setHideMenu] = useState("sm:block hidden");
+
+  const handleHamburger = () => {
+    setShowMenu("sm:block hidden");
+    setHideMenu("sm:hidden block");
+  };
+
+  const handleMenu = () => {
+    setShowMenu("sm:hidden block");
+    setHideMenu("sm:block hidden");
+  };
+
+  return (
+    <>
+      <header>
+        <nav className="container-fluid flex justify-between bg-gray-100 px-2">
+          <Link to="/">
+            <h1>Logo</h1>
+          </Link>
+          {/* Show only in classroom */}
+          <h2>Classroom Name</h2>
+          {/* Hamburger */}
+          <div className={showMenu} onClick={() => handleHamburger()}>
+            Open
+          </div>
+
+          {/* Menu Dropdown */}
+          <menu className={hideMenu}>
+            <ul className="sm:flex block gap-2">
+              <li
+                className="text-red-500 cursor-pointer sm:hidden block"
+                onClick={() => handleMenu()}
+              >
+                Close
+              </li>
+              {/* Show only in classroom */}
+              <li>Welcome</li>
+              <li>
+                <Link to="/classroomgallery">Classroom Gallery</Link>
+              </li>
+              <li>
+                <Link to="/createnewclassroom">+Create New Classroom</Link>
+              </li>
+              {/* Show only in landingPage */}
+              <li>
+                <Link to="/signup">Signup</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              {/* Show only when user is logged in */}
+              <li>
+                <Link>Logout</Link>
+              </li>
+            </ul>
+          </menu>
+        </nav>
+      </header>
+    </>
+  );
+};
+
 export default Navbar;
