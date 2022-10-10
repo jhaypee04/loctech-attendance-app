@@ -7,7 +7,7 @@ const {
 const getInstructorClassrooms = async (req, res) => {}
 
 const getInstructors = async (req, res) => {
-    const user = await model.User.find().populate('classrooms')
+    const user = await model.User.find().populate('classrooms').populate('students')
     res.status(200).json({user})
 }
 
@@ -31,7 +31,7 @@ const getModules = async (req, res) => {
 const createAttendance = async (req, res) => {
     const attendance = await model.Attendance.create({...req.body})
     // updating to attendance collection
-    findStudentAndUpdate('Reactjs', {attendance: attendance._id})
+    findStudentAndUpdate( {attendance: attendance._id})
     res.status(200).json({attendance})
 }
 
@@ -42,6 +42,8 @@ const getAttendanceOfStudents = async (req, res) => {
 
 const createNewStudent = async (req, res) => {
     const student = await model.Students.create({...req.body})
+    // updating to user collection
+    findInstructorAndUpdate("johnpauledozie004@gmail.com", {students: student._id})
     res.status(200).json({student})
 }
 
