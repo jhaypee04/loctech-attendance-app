@@ -1,4 +1,8 @@
 const model = require('../model')
+const {
+    findInstructorAndUpdate,
+    findStudentAndUpdate
+} = require('./querydbControllers')
 
 const getInstructorClassrooms = async (req, res) => {}
 
@@ -19,21 +23,32 @@ const createModule = async (req, res) => {
     res.status(200).json({module})
 }
 
-const getModules = async (req, res) => {}
+const getModules = async (req, res) => {
+    const modules = await model.Module.find()
+    res.status(200).json({modules})
+}
 
 const createAttendance = async (req, res) => {
-    const attendance = await userProfile.Attendance.create({...req.body})
+    const attendance = await model.Attendance.create({...req.body})
+    // updating to attendance collection
+    findStudentAndUpdate('Reactjs', {attendance: attendance._id})
     res.status(200).json({attendance})
 }
 
-const getAttendance = async (req, res) => {}
+const getAttendanceOfStudents = async (req, res) => {
+    const studentAttendance = await model.Students.find().populate('attendance')
+    res.status(200).json({studentAttendance})
+}
 
 const createNewStudent = async (req, res) => {
     const student = await model.Students.create({...req.body})
     res.status(200).json({student})
 }
 
-const getStudents = async (req, res) => {}
+const getStudents = async (req, res) => {
+    const students = await model.Students.find()
+    res.status(200).json({students})
+}
 
 module.exports = {
     getInstructorClassrooms,
@@ -42,29 +57,8 @@ module.exports = {
     createModule,
     getModules,
     createAttendance,
-    getAttendance,
+    getAttendanceOfStudents,
     createNewStudent,
     getStudents
 }
 
-// Read and Update Operation
-function findInstructorAndUpdate(email, object){
-    // console.log(`Email from app.post: ${email}, Classroom from post: ${object._id}. Outside app.post`)
-    model.User.findOne({email})
-    .then((docInstructor)=>{
-        const InstructorId = docInstructor._id
-        model.User.findByIdAndUpdate(
-            InstructorId,
-            { $push: object},
-            { new: true, useFindAndModify: false },
-            function(err){
-                if(err){
-                    console.log("Instructor Update Error: "+ err)
-                }
-                else{
-                    console.log("Instructor Update success")
-                }
-            }
-        )
-    })
-}

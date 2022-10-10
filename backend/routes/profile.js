@@ -8,7 +8,7 @@ const {
     createModule,
     getModules,
     createAttendance,
-    getAttendance,
+    getAttendanceOfStudents,
     createNewStudent,
     getStudents
 } = require('../controllers/profileController')
@@ -30,7 +30,7 @@ router.get('/moduleregister', getModules)
 // mark attendance
 router.post('/markattendance', createAttendance)
 // attendance register
-router.get('/attendance', getAttendance)
+router.get('/attendance', getAttendanceOfStudents)
 // new student
 router.post('/newstudent', createNewStudent)
 // student register
