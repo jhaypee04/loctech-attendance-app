@@ -3,22 +3,22 @@ const mongoose = require('mongoose')
 const Classroom = mongoose.model(
     'classroom',
     new mongoose.Schema({
-        className: {
+        classname: {
             type: String,
             required: true
         },
-        classDays: {
+        classdays: {
             type: Array,
             required: true
         },
-        numberOfWeeks: {
-            type: String,
+        classduration: {
+            type: Number,
             required: true
         },
-        weeks: [
+        module: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'week'
+                ref: 'module'
             }
         ],
         students: [

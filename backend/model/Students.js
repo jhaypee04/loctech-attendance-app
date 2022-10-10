@@ -31,16 +31,10 @@ const Students = mongoose.model(
             type: Date,
             required: true
         },
-        className: {
+        classname: {
             type: String,
             required: true
-        },
-        attendances: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'attendance'
-            }
-        ]
+        }
     })
 )
 module.exports = Students

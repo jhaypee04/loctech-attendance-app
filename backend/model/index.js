@@ -1,7 +1,7 @@
 module.exports = {
-    Instructors: require('./Instructors'),
     Classroom: require('./Classroom'),
-    Weeks: require('./Weeks'),
+    Module: require('./Module'),
     Students: require('./Students'),
-    Attendance: require('./Attendance')
+    Attendance: require('./Attendance'),
+    User: require('./User')
 }

@@ -1,17 +1,22 @@
 const mongoose = require('mongoose')
 
-const Instructors = mongoose.model(
-    'instructor',
+const User = mongoose.model(
+    'user',
     new mongoose.Schema({
-        instructorName: {
+        username: {
             type: String,
             required: true
         },
-        instructorEmail: {
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        password: {
             type: String,
             required: true
         },
-        instructorPassword: {
+        role: {
             type: String,
             required: true
         },
@@ -26,13 +31,8 @@ const Instructors = mongoose.model(
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'student'
             }
-        ],
-        attendances: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'attendance'
-            }
-        ],
+        ]
     })
 )
-module.exports = Instructors
+
+module.exports = User

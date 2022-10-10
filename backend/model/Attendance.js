@@ -3,26 +3,26 @@ const mongoose = require('mongoose')
 const Attendance = mongoose.model(
     'attendance',
     new mongoose.Schema({
-        checkedName: {
-            type: Array,
-            required: true
-        },
-        status: {
-            type: Boolean,
+        weekNo: {
+            type: Number,
             required: true
         },
         dayOfAttendance: {
             type: String,
             required: true
         },
-        className: {
+        checkedName: {
+            type: Array,
+            required: true
+        },
+        classname: {
             type: String,
             required: true
         },
-        classrooms: [
+        students: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'classroom'
+                ref: 'student'
             }
         ]
     })

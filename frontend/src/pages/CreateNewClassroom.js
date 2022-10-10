@@ -9,7 +9,7 @@ const CreateNewClassroom = () => {
             <label>Class Name</label>
             <input
               type="text"
-              name="week"
+              name="classname"
               className="sm:w-3/4 w-full border-gray-400 border-2 pl-2"
             />
           </div>
@@ -61,7 +61,7 @@ const CreateNewClassroom = () => {
             <label>Number of Weeks</label>
             <input
               type="number"
-              name="week"
+              name="classduration"
               className="sm:w-3/4 w-full border-gray-400 border-2 pl-2"
             />
           </div>

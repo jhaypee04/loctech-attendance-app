@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const Weeks = mongoose.model(
-    'week',
+const Module = mongoose.model(
+    'module',
     new mongoose.Schema({
         weekNo: {
             type: Number,
@@ -15,10 +15,10 @@ const Weeks = mongoose.model(
             type: String,
             required: true
         },
-        className: {
+        classname: {
             type: String,
             required: true
         }
     })
 )
-module.exports = Weeks
+module.exports = Module
