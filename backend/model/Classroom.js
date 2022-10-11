@@ -7,7 +7,7 @@ const Classroom = mongoose.model(
             type: String,
             required: true
         },
-        classdays: {
+        checkedDays: {
             type: Array,
             required: true
         },

@@ -21,7 +21,7 @@ const CreateNewClassroom = () => {
     index === id ? !item : item
     );
     setCheckBox(checkedBox);
-}
+  }
   // console.log(checkBox)
   var checkedDays = []
 
@@ -31,17 +31,32 @@ const CreateNewClassroom = () => {
         // return trueDays
     }
     return 0
-    })
+  })
     
-    console.log(checkedDays)
-    // console.log(chosenDays)
+  // console.log(checkedDays)
+  // console.log(chosenDays)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log({classname,classduration,checkedDays})
+
+    const response = await fetch('http://localhost:4000/loctech/user/profile/createnewclassroom', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({classname,classduration,checkedDays})
+    })
+    const json = await response.json()
+    if(response.ok){
+        console.log(json)
+    }
+  }
 
   return (
     <>
       <div className="container mx-auto my-4  w-3/4">
         <div className="bg-gray-200 text-center">+Create New Classroom</div>
 
-        <form className="bg-gray-200 my-1 px-2 py-2">
+        <form onSubmit={handleSubmit} className="bg-gray-200 my-1 px-2 py-2">
           <div className="sm:flex sm:justify-between bg-gray-300 px-2">
             <label>Class Name</label>
             <input
