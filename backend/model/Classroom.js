@@ -26,6 +26,12 @@ const Classroom = mongoose.model(
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'student'
             }
+        ],
+        attendance: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'attendance'
+            }
         ]
     })
 )

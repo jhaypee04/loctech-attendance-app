@@ -22,21 +22,21 @@ function findInstructorAndUpdate(email, object){
     })
 }
 
-function findStudentAndUpdate( object){
+function findClassroomAndUpdate(classname, object){
     // console.log(`Email from app.post: ${email}, Classroom from post: ${object._id}. Outside app.post`)
-    model.Students.find()
-    .then((docStudent)=>{
-        const studentId = docStudent._id
-        model.Students.findByIdAndUpdate(
-            studentId,
+    model.Classroom.findOne({classname})
+    .then((docClassroom)=>{
+        const classroomId = docClassroom._id
+        model.Classroom.findByIdAndUpdate(
+            classroomId,
             { $push: object},
             { new: true, useFindAndModify: false },
             function(err){
                 if(err){
-                    console.log("Students Update Error: "+ err)
+                    console.log("Classroom Update Error: "+ err)
                 }
                 else{
-                    console.log("Students Update success")
+                    console.log("Classroom Update success")
                 }
             }
         )
@@ -45,5 +45,5 @@ function findStudentAndUpdate( object){
 
 module.exports = {
     findInstructorAndUpdate,
-    findStudentAndUpdate
+    findClassroomAndUpdate
 }
