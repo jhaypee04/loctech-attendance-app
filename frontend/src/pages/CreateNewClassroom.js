@@ -1,8 +1,7 @@
-import { useEffect,useState } from 'react'
+import { useState } from 'react'
 
 const CreateNewClassroom = () => {
   const [classname, setClassname] = useState('')
-  const [classdays, setClassdays] = useState('')
   const [classduration, setClassduration] = useState('')
 
   const weekdays = [
@@ -23,44 +22,19 @@ const CreateNewClassroom = () => {
     );
     setCheckBox(checkedBox);
 }
-console.log(checkBox)
-var checkedDays = []
+  // console.log(checkBox)
+  var checkedDays = []
 
-// Succeeded in reducing the values in the new array to have only true values
-// Then, later also succeeded in creating a second array to have only the days from
-// the weekdays' arrays as compared to the number of true values from the bool_values array
-const chosenDays = checkBox.filter((trueDays, trueDaysIndex)=>{
+  checkBox.filter((trueDays, trueDaysIndex)=>{
     if( weekdays.indexOf(weekdays.at(trueDaysIndex)) === trueDaysIndex && trueDays){
         checkedDays[trueDaysIndex] = weekdays.at(trueDaysIndex).name
-        return trueDays
+        // return trueDays
     }
-    // else{
-    //         checkedDays[trueDaysIndex] = ''
-    //         return ''
-    //     }
     return 0
     })
     
     console.log(checkedDays)
-    console.log(chosenDays)
-
-  // const [list, setList] = useState([])
-  
-
-  // const clickHandler = (e, weekday) => {
-
-  //   if (e.target.checked) {
-  //       setList(prevState => [
-  //           ...prevState,
-  //           weekday
-  //       ])
-  //   }
-  // }
-//   useEffect(() => {
-//     // Perform whatever you want to do when list changes here
-//     console.log(list);
-
-// }, [list])
+    // console.log(chosenDays)
 
   return (
     <>
