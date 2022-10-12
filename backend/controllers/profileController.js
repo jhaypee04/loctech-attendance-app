@@ -31,6 +31,7 @@ const createModule = async (req, res) => {
 }
 
 const getModules = async (req, res) => {
+    const { classname } = req.params
     const modules = await model.Module.find()
     res.status(200).json({modules})
 }

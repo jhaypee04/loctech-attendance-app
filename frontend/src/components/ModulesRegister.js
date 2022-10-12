@@ -1,8 +1,31 @@
-import { useState } from "react";
+import { useEffect,useState } from "react";
 
-const ModulesRegister = () => {
+const ModulesRegister = ({classname}) => {
   const [showAccordion, setShowAccordion] = useState(false);
+  const [modules, setModules] = useState([])
 
+  useEffect(()=>{
+    const getClassroom = async () => {
+      const response = await fetch(`http://localhost:4000/loctech/user/profile/moduleregister:${classname}`)
+      const json = await response.json()
+      if(response.ok){
+        const allModules = json.modules
+        const moduleContainer = allModules.filter((requiredModules)=>{
+          if( requiredModules.classname === classname){
+            console.log(requiredModules)
+            return requiredModules
+          }
+          return null
+        })
+
+        setModules(moduleContainer)
+      }
+    }
+    
+    getClassroom()
+  },[classname])
+  
+  console.log(modules)
   return (
     <>
       <div className="container mx-auto my-4  w-3/4">
@@ -12,14 +35,19 @@ const ModulesRegister = () => {
           {/* Accordion */}
           <div className="bg-white mt-2 py-2">
             <div className="bg-gray-200 m-2 ">
-              <h1
-                className="bg-gray-300 border-b-2 border-white text-center cursor-pointer"
-                onClick={() => {
-                  setShowAccordion(!showAccordion);
-                }}
-              >
-                Week 1
-              </h1>
+              {modules && modules.map((singleModule)=>{
+                return (
+                  <h1
+                    className="bg-gray-300 border-b-2 border-white text-center cursor-pointer"
+                    onClick={() => {
+                      setShowAccordion(!showAccordion);
+                    }}
+                  >
+                    Week 1
+                  </h1>
+
+                )
+              })}
 
               {showAccordion && (
                 <div className="pb-1">

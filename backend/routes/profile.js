@@ -26,7 +26,7 @@ router.post('/createnewclassroom', createNewClassroom)
 // module form route
 router.post('/moduleform', createModule)
 // modules register
-router.get('/moduleregister', getModules)
+router.get('/moduleregister:classname', getModules)
 // mark attendance
 router.post('/markattendance', createAttendance)
 // attendance register
