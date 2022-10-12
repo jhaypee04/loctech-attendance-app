@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const Navbar = () => {
+const Navbar = ({classname}) => {
   const [showMenu, setShowMenu] = useState("sm:hidden block");
   const [hideMenu, setHideMenu] = useState("sm:block hidden");
   const { logout } = useLogout()
@@ -30,10 +30,7 @@ const Navbar = () => {
           <Link to="/">
             <h1>Logo</h1>
           </Link>
-          {/* Show only in classroom */}
-            {user && (
-              <h2>Classroom Name</h2>
-            )}
+          
           {/* Hamburger */}
           <div className={showMenu} onClick={() => handleHamburger()}>
             Open

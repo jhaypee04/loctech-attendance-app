@@ -23,7 +23,7 @@ function findInstructorAndUpdate(email, object){
 }
 
 function findClassroomAndUpdate(classname, object){
-    // console.log(`Email from app.post: ${email}, Classroom from post: ${object._id}. Outside app.post`)
+    console.log(`classname from app.post: ${classname}, Classroom from post: ${object._id}. Outside app.post`)
     model.Classroom.findOne({classname})
     .then((docClassroom)=>{
         const classroomId = docClassroom._id

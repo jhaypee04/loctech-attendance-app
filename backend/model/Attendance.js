@@ -4,7 +4,7 @@ const Attendance = mongoose.model(
     'attendance',
     new mongoose.Schema({
         weekNo: {
-            type: Number,
+            type: String,
             required: true
         },
         dayOfAttendance: {

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 // controller functions
 const {
-    getInstructorClassrooms,
+    getSingleClassroom,
     getInstructors,
     createNewClassroom,
     createModule,
@@ -15,7 +15,7 @@ const {
 
 // classroomGallery route
 // instructorCard route
-router.get('/instructorclassrooms', getInstructorClassrooms)
+router.get('/singleclassroom:classname', getSingleClassroom)
 // adminCard route
 router.get('/instructors', getInstructors)
 

@@ -8,7 +8,7 @@ import AttendanceRegister from "../components/AttendanceRegister";
 import NewStudent from "../components/NewStudent";
 import StudentRegister from "../components/StudentRegister";
 
-const Classroom = () => {
+const Classroom = ({classname}) => {
   const [showTab, setShowTab] = useState("tab1");
 
   const Tabs = [
@@ -24,8 +24,14 @@ const Classroom = () => {
     setShowTab(id);
   };
 
+  console.log(classname)
+
   return (
     <>
+    {/* Header */}
+    <header className="bg-slate-500 text-white">
+      <h1>{classname}</h1>
+    </header>
       {/* Nav */}
       <div className="Nav bg-gray-100 p-4 flex overflow-x-scroll text-center cursor-pointer">
         {Tabs.map((tab) => {
@@ -46,12 +52,12 @@ const Classroom = () => {
       {/* Tab */}
 
       <div className="bg-gray-100 my-2 py-2">
-        {showTab === "tab1" && <ModulesForm />}
-        {showTab === "tab2" && <ModulesRegister />}
-        {showTab === "tab3" && <MarkAttendance />}
-        {showTab === "tab4" && <AttendanceRegister />}
-        {showTab === "tab5" && <NewStudent />}
-        {showTab === "tab6" && <StudentRegister />}
+        {showTab === "tab1" && <ModulesForm classname={classname} />}
+        {showTab === "tab2" && <ModulesRegister classname={classname} />}
+        {showTab === "tab3" && <MarkAttendance classname={classname} />}
+        {showTab === "tab4" && <AttendanceRegister classname={classname} />}
+        {showTab === "tab5" && <NewStudent classname={classname} />}
+        {showTab === "tab6" && <StudentRegister classname={classname} />}
       </div>
     </>
   );

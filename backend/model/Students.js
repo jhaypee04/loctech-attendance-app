@@ -28,7 +28,7 @@ const Students = mongoose.model(
             required: true
         },
         dob: {
-            type: Date,
+            type: String,
             required: true
         },
         classname: {

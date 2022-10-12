@@ -4,7 +4,7 @@ const Module = mongoose.model(
     'module',
     new mongoose.Schema({
         weekNo: {
-            type: Number,
+            type: String,
             required: true
         },
         dayOfModule: {

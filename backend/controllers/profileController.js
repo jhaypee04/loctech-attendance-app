@@ -4,7 +4,11 @@ const {
     findClassroomAndUpdate
 } = require('./querydbControllers')
 
-const getInstructorClassrooms = async (req, res) => {}
+const getSingleClassroom = async (req, res) => {
+    const { classname } = req.params
+    const classroom = await model.Classroom.find({classname}).populate('classrooms').populate('students')
+    res.status(200).json({classroom})
+}
 
 const getInstructors = async (req, res) => {
     const user = await model.User.find().populate('classrooms').populate('students')
@@ -19,9 +23,10 @@ const createNewClassroom = async (req, res) => {
 }
 
 const createModule = async (req, res) => {
+    const { classname } = req.body
     const module = await model.Module.create({...req.body})
     // updating to classroom collection
-    findClassroomAndUpdate( "Reactjs", {module: module._id})
+    findClassroomAndUpdate( classname, {module: module._id})
     res.status(200).json({module})
 }
 
@@ -31,9 +36,10 @@ const getModules = async (req, res) => {
 }
 
 const createAttendance = async (req, res) => {
+    const { classname } = req.body
     const attendance = await model.Attendance.create({...req.body})
     // updating to classroom collection
-    findClassroomAndUpdate( "Reactjs", {attendance: attendance._id})
+    findClassroomAndUpdate( classname, {attendance: attendance._id})
     res.status(200).json({attendance})
 }
 
@@ -43,11 +49,12 @@ const getAttendanceOfStudents = async (req, res) => {
 }
 
 const createNewStudent = async (req, res) => {
+    const { classname } = req.body
     const student = await model.Students.create({...req.body})
     // updating to user collection
     findInstructorAndUpdate("johnpauledozie004@gmail.com", {students: student._id})
     // updating to classroom collection
-    findClassroomAndUpdate( "Reactjs", {students: student._id})
+    findClassroomAndUpdate( classname, {students: student._id})
     res.status(200).json({student})
 }
 
@@ -57,7 +64,7 @@ const getStudents = async (req, res) => {
 }
 
 module.exports = {
-    getInstructorClassrooms,
+    getSingleClassroom,
     getInstructors,
     createNewClassroom,
     createModule,
